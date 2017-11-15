@@ -11,11 +11,27 @@ public class Main {
         Motherboard theMotherboard = new Motherboard("BJ-200", "Asus", 4, 6, "v2.44");
 
         PC thePC = new PC(theCase, theMonitor, theMotherboard);
+        thePC.powerUp();
 
-        thePC.getMonitor().drawPixelAt(1500, 1200, "red");
 
-        thePC.getMotherboard().loadProgram("Windows 1.0");
-        thePC.getTheCase().pressPowerButton();
+        //Challenge problem
+
+        System.out.println("*************************************");
+
+        Sink sink = new Sink(dimensions,"silver", 2, false);
+
+        Fridge fridge = new Fridge("samsung", new Dimensions(45,98,54), new Capacity(5,3),
+                2, "white");
+
+        Stove stove = new Stove(4,"Silver","panasonic",new Dimensions(56,43,76));
+
+        Kitchen mykitchen = new Kitchen(stove,fridge,sink);
+
+        mykitchen.getFridge().makeSomePops();
+
+        mykitchen.makeSomeEggs();
+
+
 
     }
 }
