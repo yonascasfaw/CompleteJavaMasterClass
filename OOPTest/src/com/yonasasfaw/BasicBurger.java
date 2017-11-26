@@ -9,7 +9,7 @@ public class BasicBurger {
     private boolean pickles = false;
     private boolean grilledOnions = false;
 
-    public BasicBurger(String rollType, String meat) {
+    public BasicBurger( String rollType, String meat) {
         this.rollType = rollType;
         this.meat = meat;
         this.price = 10.0;
@@ -17,7 +17,6 @@ public class BasicBurger {
 
     public int order(){
         //show the order and the price and the add-ons
-        System.out.println("Your burger's base price is " + this.price);
         if(this.lettuce)
             System.out.println("You have added lettuce for " + 1 + " dollar.");
         if(this.tomato)
@@ -26,7 +25,8 @@ public class BasicBurger {
             System.out.println("You have added pickles for " + 3 + " dollars.");
         if(this.grilledOnions)
             System.out.println("You have added grilled onions for " + 4 + " dollars.");
-        System.out.println("Total price of the burger is " + price());
+        System.out.println("Your burger's base price is " + price);
+        System.out.println("Total basic burger price is " + price());
         return 1;
 
 
@@ -50,14 +50,14 @@ public class BasicBurger {
 
     public double price(){
         if(this.lettuce)
-            price += 1;
+            this.price += 1;
         if(this.tomato)
-            price += 2;
+            this.price += 2;
         if(this.pickles)
-            price += 3;
+            this.price += 3;
         if(this.grilledOnions)
-            price += 4;
-        return price;
+            this.price += 4;
+        return this.price;
     }
 
 }
