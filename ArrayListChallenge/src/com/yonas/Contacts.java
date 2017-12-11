@@ -6,25 +6,29 @@ public class Contacts {
 
     ArrayList<Contact> Contacts = new ArrayList<Contact>();
 
-    public void addContact(String name, int phoneNumber){
+    public int addContact(String name, int phoneNumber){
 
         if(findContact(name) < 0){
             Contact newContact = new Contact(name,phoneNumber);
             Contacts.add(newContact);
+            return 1;
         }else{
             System.out.println("Contact already exists");
+            return 0;
         }
 
     }
 
-    public void updateContact(String name, int newNumber){
+    public int updateContact(String name, int newNumber){
 
         int position = findContact(name);
         if(position >= 0){
             Contact updatedContact = new Contact(name, newNumber);
             Contacts.set(position, updatedContact);
+            return 1;
         }else{
             System.out.println("Contact does not exist.");
+            return 0;
         }
     }
 
@@ -44,9 +48,13 @@ public class Contacts {
         }
     }
 
+    public Contact searchContact(String contactName){
+        return Contacts.get(findContact(contactName));
+    }
 
 
-    public int findContact(String contactName){
+
+    private int findContact(String contactName){
         return Contacts.indexOf(contactName);
     }
 
