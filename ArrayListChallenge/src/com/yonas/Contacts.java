@@ -8,7 +8,7 @@ public class Contacts {
 
     public int addContact(String name, int phoneNumber){
 
-        if(findContact(name) < 0){
+        if(findContact(name) < 1){
             Contact newContact = new Contact(name,phoneNumber);
             Contacts.add(newContact);
             return 1;
@@ -22,7 +22,7 @@ public class Contacts {
     public int updateContact(String name, int newNumber){
 
         int position = findContact(name);
-        if(position >= 0){
+        if(position >= 1){
             Contact updatedContact = new Contact(name, newNumber);
             Contacts.set(position, updatedContact);
             return 1;
@@ -34,7 +34,7 @@ public class Contacts {
 
     public void removeContact(String name){
         int position = findContact(name);
-        if(position >= 0){
+        if(position >= 1){
             Contacts.remove(position);
         }else{
             System.out.println("Contact does not exist.");
@@ -55,7 +55,14 @@ public class Contacts {
 
 
     private int findContact(String contactName){
-        return Contacts.indexOf(contactName);
+//        return Contacts.indexOf(contactName);
+        for(int i=0; i<Contacts.size(); i++){
+            if(contactName == Contacts.get(i).getName()){
+                return 1;
+
+            }
+        }
+        return 0;
     }
 
 
