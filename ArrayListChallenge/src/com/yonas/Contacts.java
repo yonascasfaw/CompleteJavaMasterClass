@@ -49,7 +49,13 @@ public class Contacts {
     }
 
     public Contact searchContact(String contactName){
-        return Contacts.get(findContact(contactName));
+        for(int i=0; i<Contacts.size(); i++){
+            if(contactName == Contacts.get(i).getName()){
+                return Contacts.get(i);
+
+            }
+        }
+        return null;
     }
 
 

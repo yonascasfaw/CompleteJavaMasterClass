@@ -1,6 +1,5 @@
 package com.yonas;
 
-import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
 
 import java.util.Scanner;
 
@@ -24,14 +23,15 @@ public class MobilePhone {
             case 1:break;
             case 2: contacts.printContacts();break;
             case 3: {
-                System.out.print("Name of Contact:");
+                System.out.println("Name of Contact:");
                 String name = scanner.nextLine();
                 scanner.nextLine();
-                if(contacts.searchContact(name) != null) {
-                    System.out.print("Phone number of contact:");
+                if(contacts.searchContact(name) == null) {
+                    System.out.println("Phone number of contact:");
                     int phoneNumber = scanner.nextInt();
                     scanner.nextLine();
                     contacts.addContact(name, phoneNumber);
+                    System.out.println(name + " with " + phoneNumber + "has been added.");
                 }
                 break;
             }
