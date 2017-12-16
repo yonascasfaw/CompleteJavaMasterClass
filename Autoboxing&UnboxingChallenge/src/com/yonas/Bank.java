@@ -1,11 +1,20 @@
-import com.yonas.Branch;
+package com.yonas;
 
 import java.util.ArrayList;
 
 public class Bank {
-    ArrayList<Branch> branches = new ArrayList<Branch>();
+    private ArrayList<Branch> branches = new ArrayList<Branch>();
 
-    public boolean addbranch(String location){
+//    public Bank(String branchLocation) {
+//        addBranch(branchLocation);
+//    }
+
+
+    public ArrayList<Branch> getBranches() {
+        return branches;
+    }
+
+    public boolean addBranch(String location){
         if(findBranch(location)<0){
             Branch newBranch = new Branch(location);
             branches.add(newBranch);
@@ -33,11 +42,24 @@ public class Bank {
             return false;
     }
 
+    public boolean listCustomers(String branchLocation){
+        int position = findBranch(branchLocation);
+
+        if(position >= 0){
+            for(int i=0; i<=branches.get(position).getCustomers().size(); i++) {
+                System.out.println(branches.get(position).searchCustomer(i) + ":");
+                branches.get(position).listTransaction(branches.get(position).getCustomers().get(i));
+                }
+                return true;
+            }
+            return false;
+        }
+
 
     public int findBranch(String location){
         for(int i=0; i<=branches.size(); i++){
             if(branches.get(i).getBranchLocation() == location){
-                return i;
+                return i;   //the index(i) will be returned as being greater or equal to 0
             }
         }
         return -1;

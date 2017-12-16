@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Branch {
     private String branchLocation;
-    ArrayList<Customer> customers = new ArrayList<Customer>();
+    private ArrayList<Customer> customers = new ArrayList<Customer>();
 
     public Branch(String branchLocation){
         this.branchLocation = branchLocation;
@@ -12,6 +12,10 @@ public class Branch {
 
     public String getBranchLocation(){
         return branchLocation;
+    }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
     }
 
     public boolean addCustomer(String name, Double initialTransaction){
@@ -32,6 +36,16 @@ public class Branch {
         return false;
     }
 
+    public boolean listTransaction(Customer customer){
+        if(findCustomer(customer.getCustomerName())>=0) {
+            for (int i = 0; i <= customer.getTransactions().size(); i++) {
+                System.out.println(customer.getTransactions().get(i));
+            }
+            return true;
+        }else
+            return false;
+    }
+
 
     public int findCustomer(String name){
         for(int i=0; i<=customers.size(); i++){
@@ -41,6 +55,11 @@ public class Branch {
         }
         return -1;
     }
+
+    public String searchCustomer(int index){
+        return customers.get(index).getCustomerName();
+    }
+
 
     //    public boolean findCustomer(String name){
 //        for(int i=0; i<=customers.size(); i++){
