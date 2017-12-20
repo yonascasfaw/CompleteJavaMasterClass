@@ -1,31 +1,133 @@
 package com.company;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Scanner;
 
 public class Main {
+    private static Album myAlbum = new Album("encore");
+    private static LinkedList<Song> playList = new LinkedList<Song>();
 
 
     public static void main(String[] args) {
-        LinkedList<Song> playList = new LinkedList<Song>();
+
+        myAlbum.addSong("skyfall", 2);
+        myAlbum.addSong("goldfinger", 3);
+        myAlbum.addSong("riddick", 1);
+        myAlbum.addSong("superman", 4);
+        myAlbum.addSong("predator", 5);
+
+        addInOrder(playList,"skyfall" );
+        addInOrder(playList,"goldfinger" );
+        addInOrder(playList,"riddick" );
+        addInOrder(playList,"superman" );
+        addInOrder(playList,"predator" );
+
+        printSongs(playList);
+        printMenu();
+        playMusic(playList);
+
+
 
 
     }
 
 
-    public void addInOrder(LinkedList<Song> playList, Song song){
+    public static void addInOrder(LinkedList<Song> playList, String songName){
         ListIterator<Song> playListIterator = playList.listIterator();
-        playListIterator.add(song);
+        Song song = myAlbum.findSong(songName);
+        if(song != null){
+            playListIterator.add(song);
+        }
 
 
     }
 
-    public void removeSong(LinkedList<Song> playList, Song song){
+    public static void removeSong(LinkedList<Song> playList, Song song){
         ListIterator<Song> playListIterator = playList.listIterator();
         playListIterator.remove();
     }
 
-    public void playMusic(LinkedList<Song> playList){
+    public static void printMenu(){
+        System.out.println("Available choices are:");
+        System.out.println("0 to quit.\n" +
+                "1 to play next song.\n" +
+                "2 to play previous song.\n" +
+                "3 to replay the current song.\n" +
+                "4 to print menu options.\n");
+    }
+
+    public static void printSongs(LinkedList<Song> playList){
+        Iterator<Song> playListIterator = playList.iterator();
+        System.out.println("Songs in your playlist:");
+        while(playListIterator.hasNext()){
+            System.out.println(playListIterator.next().getTitle());
+        }
+    }
+
+    public static void playMusic(LinkedList<Song> playList){
+        Scanner scanner = new Scanner(System.in);
+        boolean quit = false;
+        boolean goingForward = true;
+        ListIterator<Song> playListIterator = playList.listIterator();
+        if(playList.isEmpty()){
+            System.out.println("No songs in the playlist.");
+        }else {
+            System.out.println(playListIterator.next().getTitle() + " is playing.");
+            printMenu();
+        }
+        while(!quit){
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch(choice){
+                case 0:
+                    quit = true;
+                    break;
+                case 1:
+
+                    if(!goingForward){
+                        if(playListIterator.hasNext()){
+                            playListIterator.next();
+                        }
+                        goingForward = true;
+                    }
+
+                    if(playListIterator.hasNext()){
+                        System.out.println(playListIterator.next().getTitle() + " is playing.");
+                    }else{
+                        System.out.println("this is the last song on the playlist.");
+                        goingForward = false;
+                    }
+
+                    break;
+                case 2:
+                    if(goingForward){
+                        if(playListIterator.hasPrevious()){
+                            playListIterator.previous();
+                        }
+                        goingForward = false;
+                    }
+
+                    if(playListIterator.hasPrevious()){
+                        System.out.println(playListIterator.previous().getTitle() + " is currently playing.");
+                    }else{
+                        System.out.println(" This is the first song on the playlist.");
+                        goingForward = true;
+                    }
+                    break;
+                case 3:
+                    if(playListIterator.hasPrevious()){
+                        System.out.println(playListIterator.previous().getTitle() + " is currently playing.");
+                    }else{
+                        System.out.println(" This is the first song on the playlist.");
+                        goingForward = true;
+                    }
+                    break;
+                case 4:
+                    printMenu();
+            }
+        }
 
     }
 }

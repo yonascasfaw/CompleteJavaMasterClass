@@ -3,16 +3,17 @@ package com.company;
 import java.util.ArrayList;
 
 public class Album {
+    private String title;
     private ArrayList<Song> songs;
 
-    public Album(String title, double duration) {
+    public Album(String title) {
         this.songs = new ArrayList<Song>();
+        this.title = title;
     }
 
     public boolean addSong(String title, double duration){
-        Song newSong = new Song(title,duration);
         if(findSong(title) == null){
-            this.songs.add(newSong);
+            this.songs.add(new Song(title,duration));
             return true;
         }else
             return false;
